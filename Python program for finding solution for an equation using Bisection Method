@@ -1,0 +1,84 @@
+import math
+import collections
+def cos(a):
+    return math.cos(a)
+def sin(a):
+    return math.sin(a)
+def tan(a):
+    return math.tan(a)
+def asin(a):
+    return math.asin(a)
+def acos(a):
+    return math.acos(a)
+def atan(a):
+    return math.atan(a)
+def log(a):
+    return math.log10(a)
+def ln(a):
+    return math.log(a)
+e = 2.71828182846
+pi = 3.14159265359
+kd = collections.deque()
+kv = collections.deque()
+ok = collections.deque()
+ko = collections.deque()
+print("\n𝓑𝓘𝓢𝓔𝓒𝓣𝓘𝓞𝓝 𝓜𝓔𝓣𝓗𝓞𝓓")
+f = input("\n𝐄𝐍𝐓𝐄𝐑 𝐓𝐇𝐄 𝐅𝐔𝐍𝐂𝐓𝐈𝐎𝐍 𝐟(𝐱) : ")
+tol = float(input("𝐄𝐍𝐓𝐄𝐑 𝐓𝐎𝐋𝐄𝐑𝐀𝐍𝐂𝐄 𝐕𝐀𝐋𝐔𝐄 : "))
+a = float(input("𝐄𝐍𝐓𝐄𝐑 𝐓𝐇𝐄 𝐒𝐓𝐀𝐑𝐓𝐈𝐍𝐆 𝐈𝐍𝐓𝐄𝐑𝐕𝐀𝐋 :  "))
+b = float(input("𝐄𝐍𝐓𝐄𝐑 𝐓𝐇𝐄 𝐄𝐍𝐃𝐈𝐍𝐆 𝐈𝐍𝐓𝐄𝐑𝐕𝐀𝐋 : "))
+dec = int(input("𝐄𝐍𝐓𝐄𝐑 𝐑𝐎𝐎𝐓 𝐃𝐄𝐂𝐈𝐌𝐀𝐋 𝐏𝐑𝐄𝐂𝐈𝐒𝐈𝐎𝐍 : "))
+f = f.replace("^", "**")
+kd.append(a)
+kd.append(b)
+c = (a+b)/2
+c1 = round(c, dec)
+kd.append(c)
+f1 = eval(f, {"x": a,"e": e, "π": pi, "ln": math.log, "log": math.log10, "cos": math.cos, "sin": math.sin, "tan": math.tan, "asin": math.asin, "acos": math.acos, "atan": math.atan})
+f2 = eval(f, {"x": b,"e": e, "π": pi, "ln": math.log, "log": math.log10, "cos": math.cos, "sin": math.sin, "tan": math.tan, "asin": math.asin, "acos": math.acos, "atan": math.atan})
+kv.append(f1)
+kv.append(f2)
+f3 = eval(f, {"x": c,"e": e, "π": pi, "ln": math.log, "log": math.log10, "cos": math.cos, "sin": math.sin, "tan": math.tan, "asin": math.asin, "acos": math.acos, "atan": math.atan})
+kv.append(f3)
+print(kv)
+print(kd)
+if f1*f2 > 0:
+    print("\nf(", a, ") = ", f1, sep="", end="\n")
+    print("f(", b, ") = ", f2, sep="")
+    print("\nThe root doesn't exist between", a, "and", b)
+else:
+    while abs(kd[-1]-kd[-2])>tol:
+        length = len(kv)
+        if kv[-1] > 0:
+            for i in range(1, length+1, 1):
+                y = (length-1)-i
+                u = kv[y]
+                if u < 0:
+                    break
+        elif kv[-1] < 0:
+            for i in range(1, length + 1, 1):
+                y=(length - 1) - i
+                u = kv[y]
+                if u > 0:
+                    break
+        w1 = kd[y]
+        ok.append(w1)
+        w2 = kd[-1]
+        ko.append(w2)
+        h = (kd[-1]+w1)/2
+        hd = round(h, dec)
+        kd.append(hd)
+        q = eval(f, {"x": h,"e": e, "π": pi, "ln": math.log, "log": math.log10, "cos": math.cos, "sin": math.sin, "tan": math.tan, "asin": math.asin, "acos": math.acos, "atan": math.atan})
+        kv.append(q)
+    print("\nf(", a, ") = ", f1,sep="")
+    print("f(", b, ") = ", f2,sep="",end="\n")
+    print("\np1 = (", a,"+", b,")/2 = ", c,end="\n")
+    print("f(p1) = ", f3, sep="", end="\n")
+    leng1 = len(kd)
+    for i in range(3, leng1, 1):
+        r1 = str(kd[i])
+        r2 = str(kv[i])
+        print("\np", i-1, " = (",ok[i-3]," + ",ko[i-3], ")/2 = ", r1.replace("e", " * 10^"),sep="",end="\n")
+        print("f(p", i-1, ") = ", r2.replace("e", " * 10^"), sep="",end="\n")
+    okk = str(kd[-1])
+    print("\n𝑻𝑯𝑬 𝑹𝑶𝑶𝑻 𝑰𝑺  :", okk.replace("e", " * 10^"))
