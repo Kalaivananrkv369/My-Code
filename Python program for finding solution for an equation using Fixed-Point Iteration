@@ -1,0 +1,95 @@
+import math
+import collections
+from sympy import *
+x = Symbol('x')
+def cos(a):
+    return math.cos(a)
+def sin(a):
+    return math.sin(a)
+def tan(a):
+    return math.tan(a)
+def asin(a):
+    return math.asin(a)
+def acos(a):
+    return math.acos(a)
+def atan(a):
+    return math.atan(a)
+def log(a):
+    return math.log10(a)
+def ln(a):
+    return math.log(a)
+def sqrt(a):
+    return math.sqrt(a)
+e = 2.71828182846
+pi = 3.14159265359
+kd = collections.deque()
+kv = collections.deque()
+equ = collections.deque()
+st = collections.deque()
+sn = collections.deque()
+dp = collections.deque()
+do = collections.deque()
+ds = collections.deque()
+print("\n𝓕𝓘𝓧𝓔𝓓-𝓟𝓞𝓘𝓝𝓣 𝓘𝓣𝓔𝓡𝓐𝓣𝓘𝓞𝓝 𝓜𝓔𝓣𝓗𝓞𝓓")
+f1 = input("\n𝐄𝐍𝐓𝐄𝐑 𝐓𝐇𝐄 𝐅𝐔𝐍𝐂𝐓𝐈𝐎𝐍 𝐟(𝐱) : ")
+tol = float(input("𝐄𝐍𝐓𝐄𝐑 𝐓𝐎𝐋𝐄𝐑𝐀𝐍𝐂𝐄 𝐕𝐀𝐋𝐔𝐄 : "))
+n = int(input("𝐄𝐍𝐓𝐄𝐑 𝐓𝐇𝐄 𝐍𝐔𝐌𝐁𝐄𝐑 𝐎𝐅 𝐄𝐐𝐔𝐀𝐓𝐈𝐎𝐍𝐒 : "))
+p = float(input("𝐄𝐍𝐓𝐄𝐑 𝐈𝐍𝐈𝐓𝐈𝐀𝐋 𝐅𝐈𝐗𝐄𝐃 𝐏𝐎𝐈𝐍𝐓 (𝐩𝟎) : "))
+dec = int(input("𝐄𝐍𝐓𝐄𝐑 𝐑𝐎𝐎𝐓 𝐃𝐄𝐂𝐈𝐌𝐀𝐋 𝐏𝐑𝐄𝐂𝐈𝐒𝐈𝐎𝐍 : "))
+print(end="\n")
+f1 = f1.replace("^", "**")
+f = eval(f1)
+for i in range(0, n, 1):
+    print("𝐄𝐍𝐓𝐄𝐑 𝐠", i+1, "(𝐱)",sep="")
+    z1 = input()
+    z1 = z1.replace("^", "**")
+    z = eval(z1)
+    equ.append(z)
+for i in range(0, n, 1):
+    y = equ[i]
+    u = diff(y, x)
+    us = str(u)
+    r = eval(us, {"x": p, "e": e, "π": pi, "ln": math.log, "log": math.log10, "cos": math.cos, "sin": math.sin, "tan": math.tan, "asin": math.asin, "acos": math.acos, "atan": math.atan, "sqrt": math.sqrt})
+    if(abs(r)>1):
+        print("\n𝐠", i+1, "(𝐱) 𝐃𝐎𝐄𝐒 𝐍𝐎𝐓 𝐂𝐎𝐍𝐕𝐄𝐑𝐆𝐄", sep="", end="\n")
+        sn.append(i+1)
+    else:
+        kd.append(y)
+        st.append(i+1)
+lens = len(sn)
+length = len(kd)
+for i in range(0, length, 1):
+    count = 0
+    print("\n𝐅𝐎𝐑 : 𝐠", st[i], "(𝐱)", sep="", end="\n")
+    y1 = str(kd[i])
+    g1 = eval(y1, {"x": p, "e": e, "π": pi, "ln": math.log, "log": math.log10, "cos": math.cos, "sin": math.sin, "tan": math.tan, "asin": math.asin, "acos": math.acos, "atan": math.atan, "sqrt": math.sqrt})
+    g = round(g1, dec)
+    kv.append(g)
+    h = eval(y1, {"x": g, "e": e, "π": pi, "ln": math.log, "log": math.log10, "cos": math.cos, "sin": math.sin, "tan": math.tan, "asin": math.asin, "acos": math.acos, "atan": math.atan, "sqrt": math.sqrt})
+    h1 = round(h, dec)
+    kv.append(h1)
+    while abs(kv[-1]-kv[-2])>tol:
+        y = eval(y1, {"x": kv[-1], "e": e,"ln": math.log, "log": math.log10, "π": pi, "cos": math.cos, "sin": math.sin, "tan": math.tan, "asin": math.asin, "acos": math.acos, "atan": math.atan, "sqrt": math.sqrt})
+        kv.append(y)
+        count+=1
+    dp.append(count + 2)
+    length1 = len(kv)
+    for i in range(0, length1, 1):
+        ok = str(kv[i])
+        print("p", i+1, " = f(p", i, ") = ", ok.replace("e", " * 10^"), sep="", end="\n")
+    ok2 = str(kv[-1])
+    print("𝑻𝑯𝑬 𝑹𝑶𝑶𝑻 𝑰𝑺  :", ok2.replace("e", " * 10^"),end="\n")
+    kv.clear()
+print("\n𝐑𝐀𝐍𝐊 : ",end="\n\n")
+for i in range(0, lens, 1):
+    print("𝐠", sn[i], "(𝐱) 𝐃𝐎𝐄𝐒 𝐍𝐎𝐓 𝐂𝐎𝐍𝐕𝐄𝐑𝐆𝐄")
+do = sorted(dp)
+lendp = len(do)
+print(end="\n")
+for i in range(0, lendp, 1):
+    for j in range(0, lendp, 1):
+        if (do[i]==dp[j]):
+            ds.append(st[j])
+            dp[j] = 0
+for i in range(0, lendp, 1):
+    print("𝐠", ds[i], "(𝐱) 𝐂𝐎𝐍𝐕𝐄𝐑𝐆𝐄𝐒 𝐈𝐍 ", do[i]," 𝐈𝐓𝐄𝐑𝐀𝐓𝐈𝐎𝐍𝐒",sep="")
