@@ -1,0 +1,88 @@
+import math
+import collections
+def cos(a):
+    return math.cos(a)
+def sin(a):
+    return math.sin(a)
+def tan(a):
+    return math.tan(a)
+def asin(a):
+    return math.asin(a)
+def acos(a):
+    return math.acos(a)
+def atan(a):
+    return math.atan(a)
+def ln(a):
+    return math.log(a)
+def log(a):
+    return math.log10(a)
+e = 2.71828182846
+pi = 3.14159265359
+kd = collections.deque()
+kv = collections.deque()
+dp = collections.deque()
+print("\n𝓜𝓔𝓣𝓗𝓞𝓓 𝓞𝓕 𝓕𝓐𝓛𝓢𝓔 𝓟𝓞𝓢𝓘𝓣𝓘𝓞𝓝")
+f=input("\n𝐄𝐍𝐓𝐄𝐑 𝐓𝐇𝐄 𝐅𝐔𝐍𝐂𝐓𝐈𝐎𝐍 : ")
+t=float(input("𝐄𝐍𝐓𝐄𝐑 𝐓𝐎𝐋𝐄𝐑𝐀𝐍𝐂𝐄 𝐕𝐀𝐋𝐔𝐄 : "))
+a=float(input("𝐄𝐍𝐓𝐄𝐑 𝐓𝐇𝐄 𝐒𝐓𝐀𝐑𝐓𝐈𝐍𝐆 𝐈𝐍𝐓𝐄𝐑𝐕𝐀𝐋 : "))
+c=input("𝐄𝐍𝐓𝐄𝐑 𝐓𝐇𝐄 𝐄𝐍𝐃𝐈𝐍𝐆 𝐈𝐍𝐓𝐄𝐑𝐕𝐀𝐋 : ")
+dec = int(input("𝐄𝐍𝐓𝐄𝐑 𝐑𝐎𝐎𝐓 𝐃𝐄𝐂𝐈𝐌𝐀𝐋 𝐏𝐑𝐄𝐂𝐈𝐒𝐈𝐎𝐍 : "))
+f = f.replace("^", "**")
+b=eval(c, {"e": e, "π": pi, "ln": math.log,"log": math.log10})
+kd.append(round(a, dec))
+z = eval(f, {"x": a, "e": e, "π": pi, "ln": math.log,"log": math.log10, "cos": math.cos, "sin": math.sin, "tan": math.tan, "asin": math.asin, "acos": math.acos, "atan": math.atan})
+kv.append(round(z,10))
+kd.append(round(b, dec))
+g = eval(f, {"x": b, "e": e, "π": pi, "ln": math.log,"log": math.log10, "cos": math.cos, "sin": math.sin, "tan": math.tan, "asin": math.asin, "acos": math.acos, "atan": math.atan})
+kv.append(round(g,10))
+u = ((kd[-1])-((kv[-1]*(kd[-1]-kd[-2]))/(kv[-1]-kv[-2])))
+kd.append(round(u,dec))
+v = eval(f, {"x": u, "e": e, "π": pi, "ln": math.log,"log": math.log10, "cos": math.cos, "sin": math.sin, "tan": math.tan, "asin": math.asin, "acos": math.acos, "atan": math.atan})
+kv.append(round(v,10))
+if(z*g>0):
+    print("The root doesn't exist between", a,"and", b)
+else:
+    while(abs(kd[-1]-kd[-2])>t):
+        length = len(kv)
+        if kv[-1] > 0:
+            for i in range(-2, -length, -1):
+                u = kv[i]
+                if u < 0:
+                    break
+        elif kv[-1] < 0:
+            for i in range(-2, -length, -1):
+                u = kv[i]
+                if u > 0:
+                    break
+        res = len(kv) + i
+        dp.append(res)
+        h = ((kd[-1])-((kv[-1]*(kd[-1]-kd[i]))/(kv[-1]-kv[i])))
+        kd.append(round(h, dec))
+        w = eval(f, {"x": h, "e": e, "π": pi, "ln": math.log,"log": math.log10, "cos": math.cos, "sin": math.sin, "tan": math.tan, "asin": math.asin, "acos": math.acos, "atan": math.atan})
+        kv.append(round(w,10))
+    length=len(kv)
+    print("\np0 =", kd[0])
+    print("f(p0) = ", kv[0], sep="")
+    print("\np1 =", kd[1])
+    print("f(p1) = ", kv[1], sep="")
+    print("\n", kv[0], " * ", kv[1], " < 0 ",sep="")
+    print("p2 =", kd[1], " - ((", kv[1], "*(", kd[1], " - ", kd[0], "))/(", kv[1], " - ", kv[0], ")) = ", kd[2],sep="")
+    print("f(p2) = ", kv[2], sep="")
+    for i in range(3, length,1):
+        if kv[i-2]*kv[i-1]<0:
+            print("\n", kv[i-2], " * ", kv[i-1], " < 0", sep="")
+        else:
+            print("\n", kv[i-2], " * ", kv[i-1], " > 0", sep="")
+        ok0 = str(kd[i])
+        o = dp[i-3]
+        ok2 = str(kd[i-1])
+        ok3 = str(kd[o])
+        ok4 = str(kv[i-1])
+        ok5 = str(kv[o])
+        print("p", i, " = ", ok2.replace("e", " * 10^"), " - ((", ok4.replace("e", " * 10^"), "*(",
+              ok2.replace("e", " * 10^"), " - ", ok3.replace("e", " * 10^"), "))/(", ok4.replace("e", " * 10^"), " - ",
+              ok5.replace("e", " * 10^"), ")) = ", ok0.replace("e", " * 10^"), sep="")
+        ok = str(kv[i])
+        print("f(p", i, ") = ", ok.replace("e", " * 10^"), sep="")
+    ok1 = str(kd[-1])
+    print("\n𝑻𝑯𝑬 𝑹𝑶𝑶𝑻 𝑰𝑺  :", ok1.replace("e", " * 10^"))
