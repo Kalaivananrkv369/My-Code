@@ -1,0 +1,66 @@
+import math
+import collections
+from sympy import *
+x = Symbol('x')
+e = 2.71828182846
+pi = 3.14159265359
+kd = collections.deque()
+kv = collections.deque()
+def cos(a):
+    return math.cos(a)
+def sin(a):
+    return math.sin(a)
+def tan(a):
+    return math.tan(a)
+def asin(a):
+    return math.asin(a)
+def acos(a):
+    return math.acos(a)
+def atan(a):
+    return math.atan(a)
+def log(a):
+    return math.log10(a)
+def ln(a):
+    return math.log(a)
+def sqrt(a):
+    return math.sqrt(a)
+print("\n𝓝𝓔𝓦𝓣𝓞𝓝'𝓢 𝓜𝓔𝓣𝓗𝓞𝓓")
+f = input("\n𝐄𝐍𝐓𝐄𝐑 𝐓𝐇𝐄 𝐅𝐔𝐍𝐂𝐓𝐈𝐎𝐍 : ")
+tol = float(input("𝐄𝐍𝐓𝐄𝐑 𝐓𝐎𝐋𝐄𝐑𝐀𝐍𝐂𝐄 𝐕𝐀𝐋𝐔𝐄 : "))
+p = float(input("𝐄𝐍𝐓𝐄𝐑 𝐈𝐍𝐈𝐓𝐈𝐀𝐋 𝐏𝐎𝐈𝐍𝐓 (𝐩𝟎) : "))
+dec = int(input("𝐄𝐍𝐓𝐄𝐑 𝐑𝐎𝐎𝐓 𝐃𝐄𝐂𝐈𝐌𝐀𝐋 𝐏𝐑𝐄𝐂𝐈𝐒𝐈𝐎𝐍 : "))
+f = f.replace("^", "**")
+kd.append(p)
+print("\nf(x) :",f,end="\n")
+a0 = eval(f, {"x": p, "e": e, "π": pi, "ln": math.log, "log": math.log10, "cos": math.cos, "sin": math.sin, "tan": math.tan, "asin": math.asin, "acos": math.acos, "atan": math.atan })
+kv.append(a0)
+a1 = diff(f, x)
+print("f'(x) :", a1,end="\n\n")
+a4 = str(a1)
+a2 = eval(a4, {"x": p, "e": e, "π": pi, "ln": math.log, "log": math.log10, "cos": math.cos, "sin": math.sin, "tan": math.tan, "asin": math.asin, "acos": math.acos, "atan": math.atan, "sqrt": math.sqrt})
+kv.append(a2)
+p1d = p-(kv[-2]/kv[-1])
+p1 = round(p1d, dec)
+kd.append(p1)
+while abs(kd[-1]-kd[-2]) > tol:
+    j = eval(f, {"x": kd[-1], "e": e, "π": pi, "ln": math.log,"log": math.log10, "cos": math.cos, "sin": math.sin, "tan": math.tan, "asin": math.asin, "acos": math.acos, "atan": math.atan})
+    kv.append(j)
+    k = eval(a4, {"x": kd[-1], "e": e, "π": pi, "ln": math.log, "log": math.log10, "cos": math.cos, "sin": math.sin, "tan": math.tan, "asin": math.asin, "acos": math.acos, "atan": math.atan, "sqrt": math.sqrt})
+    kv.append(k)
+    y1 = kd[-1]-(kv[-2]/kv[-1])
+    y = round(y1, dec)
+    kd.append(y)
+len1 = len(kd)
+for i in range(0, len1-1, 1):
+    ok = str(kv[2*i])
+    print("f(p", i, ") = ", ok.replace("e", " * 10^"),sep="", end="\n")
+    ok1 = str(kv[2*i+1])
+    print("f'(p", i, ") = ", ok1.replace("e", " * 10^"), sep="", end="\n")
+    if(i<len1-1):
+        ok3 = str(kd[i])
+        ok4 = str(kv[2*i])
+        ok5 = str(kv[2*i+1])
+        ok6 = str(kd[i+1])
+        print("\np", i+1," = ", ok3.replace("e", " * 10^")," - (", ok4.replace("e", " * 10^"),"/", ok5.replace("e", " * 10^"), ") = ", ok6.replace("e", " * 10^"), sep="", end="\n")
+ok7 = str(kd[-1])
+print("\n𝑻𝑯𝑬 𝑹𝑶𝑶𝑻 𝑰𝑺  :", ok7.replace("e", " * 10^"))
