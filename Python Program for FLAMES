@@ -1,0 +1,62 @@
+boy = input("Enter the Boy Name : ")
+girl = input("Enter the Girl Name : ")
+boy = boy.lower()
+girl = girl.lower()
+b_name = []
+g_name = []
+l1 = len(boy)
+l2 = len(girl)
+b_name = [i for i in boy if (i!=" " and i!="  ")]
+g_name = [i for i in girl if (i!=" " and i!="  ")]
+count = 0
+f_half = ""
+s_half = ""
+for i in range(0,len(b_name),1):
+    for j in range(0,len(g_name),1):
+        if b_name[i] == g_name[j]:
+            count += 1
+            g_name[j] = "#"
+            break
+length = len(b_name) + len(g_name)
+minus = 2*count
+crt = length - minus
+flames = "FLAMES"
+for i in range(6, 1, -1):
+    b = (crt % i) - 1
+    l = len(flames)
+    if b == -1:
+        for i in range(0,l-1,1):
+            s_half += flames[i]
+    else:
+        for i in range(0,b,1):
+            f_half += flames[i]
+        for i in range(b+1,l,1):
+            s_half += flames[i]
+    flames = ""
+    flames = s_half + f_half
+    f_half = ""
+    s_half = ""
+if flames == "F" :
+    print("They are FRIENDS, but Who Knows !")
+elif flames == "L" :
+    print("They are in LOVE with each other")
+elif flames == "A" :
+    print("It's just an AFFECTION")
+elif flames == "M" :
+    print("They are bound to be MARRIED")
+elif flames == "E" :
+    print("It seems like, they are ENEMIES for now but you know some of the great relationships starts from hate")
+elif flames == "S" :
+    print("They both are SOULMATES!!!")
+
+
+
+
+
+
+
+
+
+
+
+
